@@ -175,6 +175,10 @@ app.post('/api/subscribe', (req, res) => {
 
 
 
+// ✅ রুট পেজ চেক করার জন্য একটি ডামি রুট যোগ করা হলো
+app.get('/', (req, res) => {
+  res.send('Backend is running successfully!');
+});
 
 
 
