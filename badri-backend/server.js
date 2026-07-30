@@ -190,14 +190,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ Keep Alive: Render-কে সার্ভার জাগ্রত রাখার জন্য
-setInterval(() => {
-  fetch('https://badri-innovation-lab.onrender.com')
-    .then(() => console.log('Keep-alive ping sent'))
-    .catch(() => console.log('Keep-alive failed'));
-}, 600000); // প্রতি ১০ মিনিটে পিং করবে
-
-
+// ✅ Render Health Check
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+}); 
 
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);
