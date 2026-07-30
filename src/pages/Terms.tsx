@@ -48,18 +48,6 @@ const Paragraph = styled.p`
   font-size: 1.05rem;
 `;
 
-const List = styled.ul`
-  color: ${({ theme }) => theme.colors.grayText};
-  line-height: 1.8;
-  font-size: 1.05rem;
-  padding-left: 1.5rem;
-  margin-top: 0.5rem;
-`;
-
-const ListItem = styled.li`
-  margin-bottom: 0.5rem;
-`;
-
 const BackLink = styled(Link)`
   display: inline-block;
   margin-top: 2rem;
