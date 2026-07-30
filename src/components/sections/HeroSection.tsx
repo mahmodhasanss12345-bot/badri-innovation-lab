@@ -158,7 +158,7 @@ const HeroSection = () => {
         <VideoContainer>
           <video autoPlay loop muted playsInline>
             {/* আপনার ভিডিওর পাথ এখানে বসান: /src/assets/videos/your-video.mp4 */}
-            <source src="/src/assets/videos/hero.mp4" type="video/mp4" />
+            <source src="/hero.mp4" type="video/mp4" />
             আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
           </video>
         </VideoContainer>
@@ -166,7 +166,6 @@ const HeroSection = () => {
     </HeroContainer>
   );
 };
-
 
 export default HeroSection;
 
