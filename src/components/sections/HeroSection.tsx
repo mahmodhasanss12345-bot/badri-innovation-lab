@@ -94,7 +94,6 @@ const RightContent = styled.div`
   position: relative;
 `;
 
-// ✅ এখানে ভিডিওর জন্য স্টাইল পরিবর্তন করা হয়েছে (ড্যাশ লাইন সরিয়ে ফেলা হয়েছে)
 const VideoContainer = styled.div`
   width: 100%;
   max-width: 600px;
@@ -154,12 +153,10 @@ const HeroSection = () => {
       </LeftContent>
 
       <RightContent>
-        {/* ✅ ভিডিও কন্টেইনার ব্যবহার করা হয়েছে */}
         <VideoContainer>
           <video autoPlay loop muted playsInline>
-            {/* আপনার ভিডিওর পাথ এখানে বসান: /src/assets/videos/your-video.mp4 */}
             <source src="/hero.mp4" type="video/mp4" />
-            আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
+            Your browser does not support the video tag.
           </video>
         </VideoContainer>
       </RightContent>
