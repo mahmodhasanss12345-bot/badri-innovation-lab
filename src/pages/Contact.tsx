@@ -141,21 +141,19 @@ const Contact = () => {
     setStatus(null);
 
     try {
-      // Backend এ ডেটা পাঠানো
-      const response = await fetch('http://localhost:5000/api/contact', {
+      // 🟢 আপনার Google Apps Script ওয়েব অ্যাপ লিংক এখানে বসান
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzFLmwqU_G4QCWlfxLy1CP3_uAyql5iuPu_8pL1Vnyo-OHQpfdwyfEiB4h5CWSNrveD/exec';
+
+            await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
 
-      const data = await response.json();
 
-      if (response.ok) {
-        setStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully.' });
-        setFormData({ name: '', email: '', service: '', message: '' });
-      } else {
-        setStatus({ type: 'error', message: data.message || 'Something went wrong. Please try again.' });
-      }
+      setStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully.' });
+      setFormData({ name: '', email: '', service: '', message: '' });
     } catch (error) {
       setStatus({ type: 'error', message: 'Network error. Please check your connection.' });
     } finally {

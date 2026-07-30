@@ -1,6 +1,23 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+// 📝 VS Code-এ নতুন ব্লগ যোগ করতে, শুধু এই লিস্টে নতুন অবজেক্ট যোগ করুন
+const blogData = [
+  {
+    id: 1,
+    title: 'Software Development Trends in 2026',
+    desc: 'Explore the latest tools, frameworks, and best practices shaping the future of software engineering.',
+    image: '/src/assets/images/blog1.jpg',
+    date: 'Jul 30, 2026'
+  },
+  {
+    id: 2,
+    title: 'Why Mobile-First Design Matters',
+    desc: 'Learn how designing for mobile first can drastically improve user engagement and conversion rates.',
+    image: '/src/assets/images/blog2.jpg',
+    date: 'Jul 29, 2026'
+  }
+];
 
 const Container = styled.div`
   padding: 5rem 4rem;
@@ -46,7 +63,7 @@ const Grid = styled.div`
 
 const BlogCard = styled(Link)`
   display: block;
-  background: ${({ theme }) => theme.colors.white};
+  background: white;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.05);
   overflow: hidden;
@@ -80,13 +97,13 @@ const Content = styled.div`
 const BlogTitle = styled.h3`
   font-size: 1.3rem;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.darkText};
+  color: #0B132B;
   margin-bottom: 0.8rem;
   line-height: 1.4;
 `;
 
 const BlogDesc = styled.p`
-  color: ${({ theme }) => theme.colors.grayText};
+  color: #64748B;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
@@ -111,54 +128,28 @@ const DateText = styled.span`
 `;
 
 const Blog = () => {
-  const [blogs, setBlogs] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api/blogs')
-      .then((res) => res.json())
-      .then((data) => {
-        setBlogs(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setBlogs([]);
-        setLoading(false);
-      });
-  }, []);
-
   return (
     <Container>
       <Title>Our <span>Insights</span></Title>
       <SubTitle>Read the latest articles from the Badri Innovation Lab team.</SubTitle>
 
-      {loading ? (
-        <p style={{ textAlign: 'center' }}>Loading blogs...</p>
-      ) : blogs.length === 0 ? (
-        <p style={{ textAlign: 'center', color: '#64748b' }}>No blogs published yet. Stay tuned!</p>
-      ) : (
-        <Grid>
-          {blogs.map((blog) => (
-            <BlogCard key={blog.id} to={`/blog/${blog.id}`}>
-              <ImageWrapper>
-                {blog.imageUrl ? (
-                  <img src={blog.imageUrl} alt={blog.title} />
-                ) : (
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontSize: '3rem' }}>📄</div>
-                )}
-              </ImageWrapper>
-              <Content>
-                <BlogTitle>{blog.title}</BlogTitle>
-                <BlogDesc>{blog.desc}</BlogDesc>
-                <MetaInfo>
-                  <DateText>{blog.date || 'Just now'}</DateText>
-                  <span>Read more →</span>
-                </MetaInfo>
-              </Content>
-            </BlogCard>
-          ))}
-        </Grid>
-      )}
+      <Grid>
+        {blogData.map((blog) => (
+          <BlogCard key={blog.id} to={`/blog/${blog.id}`}>
+            <ImageWrapper>
+              <img src={blog.image} alt={blog.title} />
+            </ImageWrapper>
+            <Content>
+              <BlogTitle>{blog.title}</BlogTitle>
+              <BlogDesc>{blog.desc}</BlogDesc>
+              <MetaInfo>
+                <DateText>{blog.date}</DateText>
+                <span>Read more →</span>
+              </MetaInfo>
+            </Content>
+          </BlogCard>
+        ))}
+      </Grid>
     </Container>
   );
 };

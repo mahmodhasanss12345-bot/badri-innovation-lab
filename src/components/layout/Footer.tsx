@@ -126,6 +126,7 @@ const SubscribeBtn = styled.button`
   color: white;
   font-weight: 600;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.8;
@@ -160,21 +161,18 @@ const Footer = () => {
     setStatus(null);
 
     try {
-      // Backend এ ইমেইল পাঠানো হচ্ছে
-      const response = await fetch('http://localhost:5000/api/subscribe', {
+      // 🟢 আপনার Google Apps Script ওয়েব অ্যাপ লিংক এখানে বসান (Contact ফর্মের মতো একই লিংকও হতে পারে)
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzFLmwqU_G4QCWlfxLy1CP3_uAyql5iuPu_8pL1Vnyo-OHQpfdwyfEiB4h5CWSNrveD/exec';
+
+            await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus({ type: 'success', message: data.message });
-        setEmail('');
-      } else {
-        setStatus({ type: 'error', message: data.message || 'Failed to subscribe.' });
-      }
+      setStatus({ type: 'success', message: 'Successfully subscribed to our newsletter!' });
+      setEmail('');
     } catch (error) {
       setStatus({ type: 'error', message: 'Network error. Please try again.' });
     } finally {
@@ -239,4 +237,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
 
