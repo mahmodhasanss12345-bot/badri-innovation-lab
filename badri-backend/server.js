@@ -182,6 +182,20 @@ app.get('/', (req, res) => {
 
 
 
+// ✅ Render-এর স্লিপ ফিক্স করার জন্য Middleware
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
+// ✅ Keep Alive: Render-কে সার্ভার জাগ্রত রাখার জন্য
+setInterval(() => {
+  fetch('https://badri-innovation-lab.onrender.com')
+    .then(() => console.log('Keep-alive ping sent'))
+    .catch(() => console.log('Keep-alive failed'));
+}, 600000); // প্রতি ১০ মিনিটে পিং করবে
 
 
 
